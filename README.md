@@ -8,7 +8,7 @@
 
 1.打开微信羊了个羊小游戏
 
-<img src="https://dd-static.jd.com/ddimg/jfs/t1/114123/26/29811/187960/6326d7cfE5d00dd97/ccbef7e8c6b63ea2.png" alt="img" style="zoom: 25%;" />
+<img src="/static/img/9CB2ED2048A44857205781071DCE63A2.png" alt="img" style="zoom: 25%;" />
 
 2.复制头像下面的uid
 
