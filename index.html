@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>🐏了个🐏,一键入羊群 </title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="/static/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/css/login.css" media="all">
+
+    <script>
+        /^http(s*):\/\//.test(location.href) || alert('系统错误');
+    </script>
+
+</head>
+<body>
+
+
+<style>
+    body {
+        background: url("https://cdn.jianwoo.cn/static%2Fjianwoo%2F29F9B7C18F7F96C5C016B431A722A3D4.jpg") no-repeat fixed center;
+        background-size: 100% 100%;
+        position: center
+    }
+
+    .show {
+        display: block;
+    }
+
+    .hide {
+        display: none;;
+    }
+
+    .layui-btn {
+        -webkit-box-shadow: 0 3px 4px 0 rgba(7, 65, 60, .32),
+        inset 0 -2px 0 0 rgb(6, 141, 129);
+        box-shadow: 0 3px 4px 0 rgba(7, 65, 60, .32),
+        inset 0 -2px 0 0 rgb(6, 141, 129);
+        transition: all .2s;
+        -webkit-transition: all .2s;
+        -moz-transition: all .2s;
+        -ms-transition: all .2s;
+        -o-transition: all .2s;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .layui-btn:active {
+        -webkit-box-shadow: 0 3px 4px 0 rgba(7, 65, 60, .32), inset 0 0px 0 0 rgb(6, 141, 129);
+        box-shadow: 0 3px 4px 0 rgba(7, 65, 60, .32), inset 0 0px 0 0 rgb(6, 141, 129);
+        background-image: -webkit-gradient(linear, left bottom, left top,
+        from(#33ABA0), color-stop(96%, #1a988c));
+        background-image: linear-gradient(0deg, #33ABA0 0%, #1a988c 96%);
+        -webkit-transform: scale(0.98);
+        transform: scale(1);
+        transition: all .4s;
+    }
+
+    .layui-btn:hover {
+        -webkit-box-shadow: 0 8px 20px 0 rgba(7, 65, 60, .4);
+        box-shadow: 0 8px 20px 0 rgba(7, 65, 60, .4);
+        border-radius: 3px;
+        -webkit-transform: scale(1.02);
+        transform: scale(1.01) translateY(-2px);
+    }
+</style>
+<div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login">
+
+    <div class="layadmin-user-login-main login-content">
+        <div class="layadmin-user-login-box layadmin-user-login-header">
+            <h2 style="color: black">一键入羊群&nbsp;<img src="/static/img/9CB2ED2048A44857205781071DCE63A2.png" width="50">
+            </h2>
+        </div>
+        <div>你好！ <span id="usernick"></span></div>
+        <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+            <div class="layui-form-item">
+                <label class="layadmin-user-login-icon layui-icon-username layui-icon"
+                       for="LAY-user-sheep-uid"></label>
+                <input class="layui-input" id="LAY-user-sheep-uid" lay-verify="required" name="uid"
+                       placeholder="UID (必填)" autocomplete="off" type="text">
+            </div>
+            <div class="layui-form-item" id="USER-TOKEN" style="position: relative">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-template"
+                       for="LAY-user-sheep-token"></label>
+                <input class="layui-input" id="LAY-user-sheep-token" lay-verify="required" name="token"
+                       placeholder="Token (必填)" type="text" style="width: 70%;" rows="2"></input>
+                <button class="layui-btn layui-btn-fluid layui-inline" id="get-token"
+                        style="width: 29%;position:absolute;right: 0;top:0;padding: 0">获取token
+                </button>
+
+            </div>
+            <div class="layui-form-item" id="COUNT">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-add-1"
+                       for="LAY-user-sheep-count"></label>
+                <input class="layui-input" id="LAY-user-sheep-count" lay-verify="required|number" name="count"
+                       placeholder="入群次数[1-100] (必填)" type="number">
+            </div>
+            <div class="layui-form-item" id="TIME">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-time"
+                       for="LAY-user-sheep-count"></label>
+                <input class="layui-input" id="LAY-user-sheep-time" lay-verify="number" name="time"
+                       placeholder="通关时间,单位秒[建议1-999]" type="number">
+            </div>
+            <div class="layui-form-item" style="background-color: white">
+                <label class="layui-form-label">游戏模式</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="mode" value="1" title="每日闯关" checked="1">
+                    <input type="radio" name="mode" value="2" title="话题PK">
+                </div>
+            </div>
+            <div class="layui-form-item">
+
+                <button class="layui-btn layui-btn-fluid" id="submit" lay-filter="user-submit" lay-submit><i
+                        style="display: none"
+                        class=" layui-icon layui-icon layui-icon-loading  layui-anim layui-anim-rotate layui-anim-loop"></i>
+                    一键入群
+                </button>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">执行控制台</div>
+                <div class="layui-card-body">
+                    <span style="color: green"><span>成功</span><span id="success">0</span></span>
+                    &nbsp;&nbsp;
+                    <span style="color: red"><span>失败</span><span id="failed">0</span></span>
+                    &nbsp;&nbsp;
+                    <span><span id="status">待处理</span></span>
+                    &nbsp;&nbsp;
+                    <a href="javascript:" id="log">日志明细</a>
+                </div>
+            </div>
+
+            <div class="layui-collapse" lay-accordion="">
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title"><strong>说明</strong></h2>
+                    <div class="layui-colla-content layui-show" style="padding:0">
+                        <div class="" style="background-color: white;padding: 5px">
+                            提示没有权限是大概率是Token无效，一般是填写错误导致的<br>
+                            通关的时间如果不填或者0，则是由随机生成<br>
+                            token整个游戏通用,目前有效期是1年<br>
+                            UID一般是游戏中"我的名片"中头像下的ID号<br>
+                            <a href="https://github.com/gulihua10010/sheep">详细教程</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title"><strong>免责声明</strong></h2>
+                    <div class="layui-colla-content" style="padding:0">
+                        <div class="" style="background-color: white;padding: 5px">
+
+                            此网站仅供娱乐, 且仅用于测试和学习研究！禁止将源码用于商业用途，不能保证其合法性，准确性，完整性和有效性，请根据情况自行判断。<br>
+                            作者对任何操作所导致的问题概不负责，包括但不限于由任何脚本错误导致的任何损失或损害.<br>
+                            请勿将本项目的任何内容用于商业或非法目的，否则后果自负。<br>
+                            如果任何单位或个人认为该项目的脚本可能涉嫌侵犯其权利，则应及时邮箱(gulihua@jianwoo.cn)通知并提供身份证明，所有权证明，我们将在收到认证文件后删除相关脚本及页面。<br>
+                            以任何方式查看此网站的使用者都应仔细阅读此声明。作者保留随时更改或补充此免责声明的权利。<br>
+                            一旦使用并操作了本网站，则视为您已接受此免责声明。<br>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">网站源码</h2>
+                    <div class="layui-colla-content" style="padding:0">
+                        <div class="" style="background-color: white;padding: 5px">
+                            <a href="https://github.com/gulihua10010/sheep" alt="https://github.com/gulihua10010/sheep">源码</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">网页版羊了个羊</h2>
+                    <div class="layui-colla-content" style="padding:0">
+                        <div class="" style="background-color: white;padding: 5px">
+                            <a href="/yanglegeyang/web/index.html" alt="网页版羊了个羊">网页版羊了个羊(纯前端)</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">个人博客</h2>
+                    <div class="layui-colla-content" style="padding:0">
+                        <div class="" style="background-color: white;padding: 5px">
+                            <a href="https://jianwoo.cn" alt="简窝博客">简窝博客</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<script id="logTable" type="text/html">
+    <ul>
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th>服务响应</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{# layui.each(d.list, function(index, item){ }}
+            <tr>
+                <td>{{ item }}</td>
+            </tr>
+            {{# }); }}
+            {{# if(d.list.length === 0){ }}
+            <tr>
+                <td>无数据</td>
+            </tr>
+            {{# } }}
+
+            </tbody>
+        </table>
+
+    </ul>
+</script>
+<script src="/static/plugins/layui/layui.js"></script>
+
+<script>
+
+    layui.extend({
+        utils: "static/js/util"
+    }).define(['form', 'layer', "utils", "cfg", "laytpl"], function (exports) {
+        var form = layui.form
+            , layer = layui.layer
+            , $ = layui.jquery
+            , utils = layui.utils
+            , cfg = layui.cfg
+            , laytpl = layui.laytpl
+
+        ;
+        var cnt = 0, successCnt = 0, failedCnt = 0, log = {list: []}, timer, processComplete = false;
+
+        if (!isEmpty(getCache("uid"))) {
+            $('#LAY-user-sheep-uid').val(getCache("uid"));
+        }
+
+        $('#get-token').click(function () {
+            var uid = $('#LAY-user-sheep-uid').val();
+            if (isEmpty(uid)) {
+                alertFail("", "请填写UID")
+                return;
+            }
+            putCache("uid", uid)
+            if (!isEmpty(getCache(uid))) {
+                $('#LAY-user-sheep-token').val(getCache(uid));
+                return;
+            }
+            req({
+                url: cfg.userInfoUrl,
+                data: {
+                    uid: uid,
+                    t: cfg.initToken,
+                },
+                success: function (res) {
+                    $('#usernick').text(res[cfg.response.dataName].nick_name)
+                    req({
+                        url: cfg.loginTouristUrl,
+                        type: "post",
+                        data: {
+                            uuid: res[cfg.response.dataName].wx_open_id
+                        },
+                        header: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        success: function (res) {
+                            alertSuccess("", "token获取成功!")
+                            $('#LAY-user-sheep-token').val(res[cfg.response.dataName].token);
+                            putCache(uid, res[cfg.response.dataName].token)
+                        }
+
+                    })
+                }
+
+            })
+
+        })
+
+
+        layui.form.on('submit(user-submit)', function (formData) {
+            $(this).attr("disabled", true)
+            $('.layui-icon-loading').css("display", 'inline-block')
+            $('#status').text('正在处理..')
+            var field = formData.field;
+            if (cfg.debug) {
+                console.log(field)
+            }
+            if (isNaN(field.count) || field.count > 100 || field.count < 1) {
+                alertFail("", "入群次数应为数字，且范围在1-100之内！")
+                return;
+            }
+            if (!isEmpty(field.time) && (isNaN(field.time) || field.time > 999 || field.time < 1)) {
+                alertFail("", "通关时间应为数字，且范围在1-999之内！")
+                return;
+            }
+            if (isEmpty(field.time)) {
+                field.time = Math.floor(Math.random() * 999 + 1)
+            }
+
+            var url = cfg.defaultGameUrl;
+
+            if (field.mode === '2') {
+                url = cfg.topicGameUrl;
+            }
+
+            timer = setInterval(function () {
+                if (cnt >= field.count - 1) {
+                    clearInterval(timer);
+                    processComplete = true;
+                    $('#submit').attr("disabled", false)
+                    $('.layui-icon-loading').css("display", 'none')
+                    $('#status').text('处理完成')
+                    cnt = -1
+                }
+                req({
+                    url: url,
+                    data: {
+                        t: field.token,
+                        rank_score: 1,
+                        rank_time: field.time,
+                        rank_role: 1,
+                        rank_state: 1,
+                        skin: 1,
+                    },
+                    alert: false,
+                    success: function (res) {
+                        successCnt++;
+                        $('#success').text(successCnt)
+                        log.list.push(JSON.stringify(res))
+
+                    },
+                    failed: function (res) {
+                        failedCnt++;
+                        console.log("f")
+                        $('#failed').text(failedCnt)
+                        log.list.push(JSON.stringify(res))
+                    }
+
+                })
+                cnt++;
+
+
+            }, cfg.loopTime);
+
+
+        });
+
+        $('#log').click(function () {
+            layer.open({
+                type: 1,
+                title:'日志明细',
+                skin: 'layui-layer-rim', //加上边框
+                area: ['90%', '60%'], //宽高
+                content: '<div id="view"></div>'
+                , success: function (layero, index) {
+                    var getTpl = document.getElementById('logTable').innerHTML
+                        , view = document.getElementById('view');
+                    laytpl(getTpl).render(log, function (html) {
+                        view.innerHTML = html;
+                    });
+                }
+            });
+        })
+
+
+
+    })
+
+</script>
+</body>
+</html>
