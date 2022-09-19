@@ -6,7 +6,7 @@
  */
 
 layui.extend({
-    cfg: "/static/js/config"
+    cfg: "./static/js/config"
 }).define(["form", "cfg"], function (exports) {
     var $ = layui.$
         , layer = layui.layer
