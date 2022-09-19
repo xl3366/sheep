@@ -21,7 +21,7 @@ layui.define(['layer', 'element', 'util'], function (exports) {
 
 
         , userInfoUrl : "https://cat-match.easygame2021.com/sheep/v1/game/user_info"
-        , loginTouristUrl : "https://cat-match.easygame2021.com/sheep/v1/user/login_tourist"
+        , loginTouristUrl : "https://cat-match.easygame2021.com/sheep/v1/user/login_oppo"
         , defaultGameUrl : "https://cat-match.easygame2021.com/sheep/v1/game/game_over"
         , topicGameUrl : "https://cat-match.easygame2021.com/sheep/v1/game/topic_game_over"
 
