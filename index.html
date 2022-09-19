@@ -263,11 +263,11 @@
                         type: "post",
                         data: {
                             uid: res[cfg.response.dataName].wx_open_id,
-avatar: 1,
-nick_name: 1,
-sex: 1,
-t: cf,
-content-type: application/json,
+avatar: cfg.initToken,
+nick_name: cfg.initToken,
+sex: cfg.initToken,
+t: cfg.initToken,
+content-type: cfg.initToken,
                         },
                         header: {
                             'Content-Type': 'application/x-www-form-urlencoded'
