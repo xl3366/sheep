@@ -262,7 +262,13 @@
                         url: cfg.loginTouristUrl,
                         type: "post",
                         data: {
-                            uuid: res[cfg.response.dataName].wx_open_id
+                            uid: res[cfg.response.dataName].wx_open_id,
+Avatar:1,
+nick_name:1,
+sex:1,
+t:cfg.initToken,
+type:application/json,
+User-Agent:Mozilla/5.0 (iPhone; CPU iPhone OS+15_6 ike Mac+OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.28(0x18001c26) NetType/WIFI Language/zh_CN
                         },
                         header: {
                             'Content-Type': 'application/x-www-form-urlencoded'
